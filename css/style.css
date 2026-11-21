@@ -1,0 +1,337 @@
+/* =========================================================
+   Orion Stylianou — personal site
+   Colours live in the two theme blocks below; change them there.
+   ========================================================= */
+
+:root {
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Spectral", Georgia, serif;
+  --radius-card: 18px;
+  --radius-small: 8px;
+  --space: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg: #13202b;          /* night slate */
+  --surface: #1a2a38;     /* cards */
+  --surface-2: #213446;   /* raised bits: tabs, tags */
+  --line: #2d4357;
+  --text: #e6ebef;
+  --muted: #95a6b4;
+  --accent: #e39a45;      /* alpenglow */
+  --accent-ink: #1a1206;
+  --contour: rgba(227, 154, 69, 0.38);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #e9eef2;
+  --surface: #ffffff;
+  --surface-2: #f0f4f7;
+  --line: #d3dde5;
+  --text: #17232e;
+  --muted: #586977;
+  --accent: #b25f14;
+  --accent-ink: #ffffff;
+  --contour: rgba(178, 95, 20, 0.35);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 600; line-height: 1.25; }
+h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; }
+h3 { font-size: 1.25rem; margin: 2.25rem 0 1rem; }
+h4 { font-size: 1.0625rem; }
+p { margin: 0 0 0.9em; }
+
+.muted { color: var(--muted); }
+
+/* ---------------- Page layout ---------------- */
+
+.page {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 1.75rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  align-items: start;
+}
+
+/* ---------------- Profile card ---------------- */
+
+.profile {
+  position: sticky;
+  top: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.profile-map {
+  position: relative;
+  height: 190px;
+  color: var(--contour);
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-map svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.monogram {
+  position: absolute;
+  left: 1.5rem;
+  bottom: -34px;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 5px var(--surface);
+}
+
+.profile-body { padding: 3.25rem 1.5rem 1.5rem; }
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.role { color: var(--muted); margin: 0.35rem 0 1.5rem; line-height: 1.4; }
+
+.contact-list { margin: 0; display: grid; gap: 0.9rem; }
+.contact-list dt { font-size: 0.875rem; color: var(--muted); }
+.contact-list dd { margin: 0; overflow-wrap: anywhere; }
+.contact-list a { color: var(--text); text-decoration-color: var(--line); }
+.contact-list a:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+.updated {
+  margin: 1.75rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ---------------- Main panel ---------------- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 0 2.5rem 2.75rem;
+  min-height: 70vh;
+}
+
+.panel-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.tabs { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+
+.tabs a {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.975rem;
+}
+.tabs a:hover { color: var(--text); }
+.tabs a[aria-selected="true"] { background: var(--surface-2); color: var(--accent); }
+
+.theme-toggle {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.theme-toggle .icon-moon { fill: currentColor; stroke: none; }
+[data-theme="dark"] .icon-moon,
+[data-theme="light"] .icon-sun { display: none; }
+
+/* Panels: all visible without JavaScript; JS shows one at a time */
+.js .tab-panel[hidden] { display: none; }
+.tab-panel { max-width: 46rem; }
+.tab-panel + .tab-panel { margin-top: 3rem; }
+.js .tab-panel + .tab-panel { margin-top: 0; }
+
+.prose { margin-top: 1.25rem; }
+.prose p { max-width: 38em; }
+
+/* ---------------- About: what I'm doing ---------------- */
+
+.doing {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+.doing li { padding-left: 1rem; border-left: 2px solid var(--accent); }
+.doing h4 { margin-bottom: 0.25rem; }
+.doing p { margin: 0; color: var(--muted); }
+
+/* ---------------- Resume ---------------- */
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-small);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.button:hover { filter: brightness(1.08); }
+
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li {
+  position: relative;
+  padding: 0 0 1.5rem 1.6rem;
+  border-left: 1px solid var(--line);
+  margin-left: 5px;
+}
+.timeline li:last-child { padding-bottom: 0.25rem; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0.45em;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+.when { color: var(--muted); font-size: 0.925rem; white-space: nowrap; }
+.where { color: var(--muted); font-style: italic; margin: 0.1rem 0 0.45rem; }
+.timeline p:last-child { margin-bottom: 0; }
+
+.skills { margin: 0; display: grid; gap: 0.6rem; }
+.skills div { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; }
+.skills dt { color: var(--muted); }
+.skills dd { margin: 0; }
+
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+.plain { margin: 0; padding-left: 1.1rem; }
+.plain li { margin-bottom: 0.35rem; }
+.plain li::marker { color: var(--accent); }
+
+/* ---------------- Portfolio ---------------- */
+
+.project {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.project h3 { margin: 0; font-size: 1.15rem; }
+.project > p { margin-top: 0.75rem; }
+
+.tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; padding: 0; }
+.tags li {
+  font-size: 0.85rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.note { margin: 1rem 0 0; font-size: 0.95rem; color: var(--muted); }
+.text-link { display: inline-block; margin-top: 1rem; font-weight: 600; }
+
+/* ---------------- Small screens ---------------- */
+
+@media (max-width: 900px) {
+  .page { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
+  .profile { position: static; }
+  .profile-map { height: 130px; }
+  .panel { padding: 0 1.25rem 2rem; min-height: 0; }
+  .panel-bar { position: sticky; top: 0; z-index: 2; background: var(--surface); }
+}
+
+@media (max-width: 560px) {
+  h2 { font-size: 1.65rem; }
+  .doing, .two-col { grid-template-columns: 1fr; }
+  .skills div { grid-template-columns: 1fr; gap: 0; }
+  .page { padding: 0.75rem; }
+  .panel { padding: 0 0.9rem 1.75rem; }
+  .tabs { gap: 0; flex-wrap: nowrap; overflow-x: auto; }
+  .tabs a { padding: 0.35rem 0.5rem; font-size: 0.925rem; white-space: nowrap; }
+  .theme-toggle { width: 36px; height: 36px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .profile-map svg path {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw 2.4s ease-out forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+}
